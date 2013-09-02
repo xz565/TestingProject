@@ -18,7 +18,8 @@ public class StringReorderDistanceApart {
 
 		Map<Character, Integer> contentMap = sortCharactors(str);
 
-		FixedSizeQueue<Character> window = new FixedSizeQueue<Character>(dist);
+		FixedSizeQueue<Character> window = new FixedSizeQueue<Character>(
+				dist - 1);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -42,6 +43,7 @@ public class StringReorderDistanceApart {
 					}
 				}
 			}
+
 		}
 
 		return sb.toString();
