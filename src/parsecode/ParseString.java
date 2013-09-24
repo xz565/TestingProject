@@ -1,5 +1,30 @@
 package parsecode;
 
+/*
+ * "TIRE_PRESSURE:tp,
+GEO_BOUNDARY:gb,
+IGN_STATE:ig,
+IGN_CYCLES:ic,
+ODO_MONITOR:od,
+TIMESTAMP:ts,
+PERIODIC_DISTANCE:pd,
+DTC:dt,
+OIL_LIFE_MONITOR:ol,
+TIRE_PRESSURE_STATUS_MONITOR:ps,
+FUEL_LEVEL_MONITOR:fl
+"
+"And:A, Or:O, Not:N"
+
+"A[tp,ig]"
+"A[O[fl,pd],A[ic,N[od]]]"
+
+[ [fl or pd] and [not ic] ]
+
+"And[TIRE_PRESSURE, IGN_STATE]"
+[TIRE_PRESSURE and IGN_STATE]
+ */
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
