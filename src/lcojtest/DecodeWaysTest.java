@@ -1,6 +1,7 @@
-package lcoj;
+package lcojtest;
 
 import static org.junit.Assert.*;
+import lcoj.DecodeWays;
 
 import org.junit.Test;
 
