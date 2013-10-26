@@ -1,6 +1,7 @@
-package lcoj;
+package lcojtest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import lcoj.DivideTwoIntegers;
 
 import org.junit.Test;
 
