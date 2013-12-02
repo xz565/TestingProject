@@ -1,5 +1,7 @@
 package lcoj;
 
+import lcoj.common.TreeNode;
+
 public class MaximumDepthofBinaryTree {
 
     public int maxDepth(TreeNode root) {

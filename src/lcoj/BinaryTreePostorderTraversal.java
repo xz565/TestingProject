@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
+import lcoj.common.TreeNode;
+
 
 public class BinaryTreePostorderTraversal {
 

@@ -3,6 +3,8 @@ package lcoj;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import lcoj.common.TreeNode;
+
 
 public class BinaryTreePreorderTraversal {
 
