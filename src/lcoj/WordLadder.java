@@ -29,15 +29,19 @@ public class WordLadder {
     // May be a solution, but TLE
     public int ladderLength(String start, String end, HashSet<String> dict) {
 
+	HashSet<String> visited = new HashSet<String>();
+	visited.add(start);
+
 	HashSet<String> currentLayer = new HashSet<String>();
 	currentLayer.add(start);
 
-	HashSet<String> nextLayer = getNextLayer(currentLayer, dict, end);
+	HashSet<String> nextLayer = getNextLayer(currentLayer, dict, end,
+		visited);
 	int count = 2;
 
 	while (!nextLayer.contains(end)) {
 	    currentLayer = nextLayer;
-	    nextLayer = getNextLayer(currentLayer, dict, end);
+	    nextLayer = getNextLayer(currentLayer, dict, end, visited);
 
 	    if (nextLayer.isEmpty()) {
 		return 0;
@@ -49,7 +53,7 @@ public class WordLadder {
     }
 
     private HashSet<String> getNextLayer(HashSet<String> currentLayer,
-	    HashSet<String> dict, String end) {
+	    HashSet<String> dict, String end, HashSet<String> visited) {
 
 	HashSet<String> nextLayer = new HashSet<String>();
 
@@ -59,17 +63,16 @@ public class WordLadder {
 		char currtChar = sb.charAt(i);
 		for (char ch = 'a'; ch <= 'z'; ch++) {
 
-		    if (ch != currtChar) {
-			sb.setCharAt(i, ch);
+		    sb.setCharAt(i, ch);
 
-			if (end.equals(sb.toString())) {
-			    nextLayer.add(sb.toString());
-			    return nextLayer;
-			}
+		    if (end.equals(sb.toString())) {
+			nextLayer.add(sb.toString());
+			return nextLayer;
+		    }
 
-			if (dict.contains(sb.toString())) {
-			    nextLayer.add(sb.toString());
-			}
+		    if (dict.contains(sb.toString())
+			    && !visited.contains(sb.toString())) {
+			nextLayer.add(sb.toString());
 		    }
 		}
 		// reset the chat at current position
@@ -77,6 +80,7 @@ public class WordLadder {
 	    }
 	}
 
+	visited.addAll(nextLayer);
 	return nextLayer;
     }
 
