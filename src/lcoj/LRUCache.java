@@ -16,43 +16,59 @@ import java.util.Map;
 
 public class LRUCache {
 
-    int maxCapacity;
-    Map<Integer, Integer> map;
-    Deque<Integer> usageQueue;
+	int maxCapacity;
+	Map<Integer, Integer> map;
+	LinkedList<Integer> usageQueue;
 
-    public LRUCache(int capacity) {
+	public LRUCache(int capacity) {
 
-	this.maxCapacity = capacity;
-	map = new HashMap<Integer, Integer>();
-	usageQueue = new LinkedList<Integer>();
-    }
-
-    public int get(int key) {
-
-	if (map.keySet().contains(key)) {
-
-	    usageQueue.remove(key);
-	    usageQueue.addFirst(key);
-
-	    return map.get(key);
+		this.maxCapacity = capacity;
+		map = new HashMap<Integer, Integer>();
+		usageQueue = new LinkedList<Integer>();
 	}
 
-	return -1;
-    }
+	public int get(int key) {
 
-    public void set(int key, int value) {
+		if (map.keySet().contains(key)) {
 
-	if (!map.keySet().contains(key)) {
+			// this step takes O(N) time, causes TLE
+			usageQueue.remove(key);
+			usageQueue.addFirst(key);
 
-	    if (map.size() >= maxCapacity) {
+			return map.get(key);
+		}
 
-		int lastKey = usageQueue.getLast();
-		map.remove(lastKey);
-		usageQueue.removeLast();
-	    }
-
-	    map.put(key, value);
-	    usageQueue.addLast(key);
+		return -1;
 	}
-    }
+
+	public void set(int key, int value) {
+
+		if (map.size() >= maxCapacity) {
+
+			int lastKey = usageQueue.getLast();
+			map.remove(lastKey);
+			usageQueue.removeLast();
+		}
+
+		map.put(key, value);
+		usageQueue.addFirst(key);
+	}
+
+	private class CacheNode {
+
+		int key;
+		int value;
+
+	}
+
+	public static void main(String[] args) {
+
+		LRUCache cache = new LRUCache(2);
+		cache.set(2, 1);
+		cache.set(2, 2);
+		System.out.println(cache.get(2));
+		cache.set(1, 1);
+		cache.set(4, 1);
+		System.out.println(cache.get(2));
+	}
 }
