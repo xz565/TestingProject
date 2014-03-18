@@ -1,6 +1,5 @@
 package lcoj;
 
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -17,25 +16,23 @@ import java.util.Map;
 public class LRUCache {
 
 	int maxCapacity;
-	Map<Integer, Integer> map;
-	LinkedList<Integer> usageQueue;
-
+	Map<Integer, CacheNode> map;
+	CacheNode head;
+	CacheNode tail;
+	
 	public LRUCache(int capacity) {
 
 		this.maxCapacity = capacity;
-		map = new HashMap<Integer, Integer>();
-		usageQueue = new LinkedList<Integer>();
+		map = new HashMap<Integer, CacheNode>();
 	}
 
 	public int get(int key) {
 
 		if (map.keySet().contains(key)) {
 
-			// this step takes O(N) time, causes TLE
-			usageQueue.remove(key);
-			usageQueue.addFirst(key);
-
-			return map.get(key);
+			CacheNode node = map.get(key);
+			node.moveToHead();
+			return node.value;
 		}
 
 		return -1;
@@ -43,21 +40,43 @@ public class LRUCache {
 
 	public void set(int key, int value) {
 
-		if (map.size() >= maxCapacity) {
-
-			int lastKey = usageQueue.getLast();
-			map.remove(lastKey);
-			usageQueue.removeLast();
+		if(map.keySet().contains(key)) {
+			
+			CacheNode node = map.get(key);
+			node.value = value;
+			node.moveToHead();
+			
+		} else {
+			
+			if(map.keySet().size() >= maxCapacity) {
+				tail.remove();
+			}
+			
+			CacheNode node = new CacheNode(key, value);
+			node.moveToHead();
 		}
-
-		map.put(key, value);
-		usageQueue.addFirst(key);
 	}
 
 	private class CacheNode {
 
 		int key;
 		int value;
+		
+		CacheNode prev;
+		CacheNode next;
+		
+		public CacheNode(int key2, int value2) {
+			key = key2;
+			value = value2;
+		}
+
+		public void moveToHead() {
+			
+		}
+
+		public void remove() {
+			
+		}
 
 	}
 
