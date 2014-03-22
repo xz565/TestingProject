@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-import sun.java2d.pipe.DuctusRenderer;
-
 /*
  * Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
  * 
@@ -16,62 +14,60 @@ import sun.java2d.pipe.DuctusRenderer;
  */
 public class WordBreak {
 
-  Set<String> cache = new HashSet<String>();
+	Set<String> cache = new HashSet<String>();
 
+	// DP solution
+	public boolean wordBreak(String s, Set<String> dict) {
 
-  public boolean wordBreak(String s, Set<String> dict) {
+		return false;
+	}
 
-    if (s.length() == 0) {
-      return true;
-    }
-    
-    // DFS
-    LinkedList<String> stack = new LinkedList<String>();
-    stack.push(s);
-    
-    while(!stack.isEmpty()) {
-    	
-    	String currt = stack.pop();
-    	
-    	boolean containFlag = false;
-    	for(int i = 1; i <= currt.length(); i++) {
-    		
-    		String leftStr = currt.substring(0, i);
-    		String rightStr = currt.substring(i);
-    		if(dict.contains(leftStr)) {
-    			
-    			containFlag = true;
-    			if(rightStr.isEmpty()) {
-    				return true;
-    			} else {
-    				stack.push(rightStr);
-    			}
-    		}
-    	}
-    	
-    	if(!containFlag) {
-    		return false;
-    	}
-    }
-    
-    return false;
-  }
-  
+	// brute force solution
+	public boolean wordBreakBF(String s, Set<String> dict) {
 
-  public static void main(String[] args) {
+		if (s.length() == 0) {
+			return true;
+		}
 
-    Set<String> dict = new HashSet<String>();
-    String[] strings = { "a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa" };
-    dict.addAll(Arrays.asList(strings));
+		// DFS
+		LinkedList<String> stack = new LinkedList<String>();
+		stack.push(s);
 
-    WordBreak wb = new WordBreak();
-    String s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
-    System.out.println(wb.wordBreak(s, dict));
-    
-    dict.clear();
-    dict.add("a");
-    dict.add("b");
-    s = "ab";
-    System.out.println(wb.wordBreak(s, dict));
-  }
+		while (!stack.isEmpty()) {
+
+			String currt = stack.pop();
+
+			for (int i = 1; i <= currt.length(); i++) {
+				String leftStr = currt.substring(0, i);
+				String rightStr = currt.substring(i);
+				if (dict.contains(leftStr)) {
+					if (rightStr.isEmpty()) {
+						return true;
+					} else {
+						stack.push(rightStr);
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public static void main(String[] args) {
+
+		Set<String> dict = new HashSet<String>();
+		String[] strings = { "a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa",
+				"aaaaaaa", "aaaaaaaa", "aaaaaaaaa", "aaaaaaaaaa" };
+		dict.addAll(Arrays.asList(strings));
+
+		WordBreak wb = new WordBreak();
+		String s = "aaaaaaaaaaaaaab";
+		System.out.println(wb.wordBreakBF(s, dict));
+
+		dict.clear();
+		dict.add("a");
+		dict.add("b");
+		s = "ab";
+		System.out.println(wb.wordBreakBF(s, dict));
+	}
 }
