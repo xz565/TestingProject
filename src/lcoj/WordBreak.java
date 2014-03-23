@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+import sun.misc.Cache;
+
+import com.sun.jndi.url.ldaps.ldapsURLContextFactory;
+
 /*
  * Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
  * 
@@ -15,10 +19,39 @@ import java.util.Set;
 public class WordBreak {
 
 	Set<String> cache = new HashSet<String>();
-
+	
 	// DP solution
+	// The hardest part of DP problem is to abstract the repeation part of the algorithm and store them properly
+	// 
 	public boolean wordBreak(String s, Set<String> dict) {
 
+		cache.clear();
+		if(s.isEmpty()) return true;
+		
+		boolean flag = false;
+		
+		for(int i = 1; i <= s.length(); i++) {
+			
+			String prefix = s.substring(0, i);
+			
+			if(dict.contains(prefix)) {
+				
+				String suffix = s.substring(i);
+				
+				if(cache.contains(suffix)) {
+					continue;
+				} else {
+					flag = wordBreak(suffix, dict);
+					
+					if(flag) {
+						return true; 
+					} else{
+						cache.add(suffix);
+					}
+				}
+			}
+		}
+		
 		return false;
 	}
 
@@ -52,7 +85,28 @@ public class WordBreak {
 
 		return false;
 	}
+	
+	// DFS
+	// TLE on aa...aab
+	public boolean wordBreakBF2(String s, Set<String> dict) {
+		
+		if(s.isEmpty())
+			return true;
+		
+		for(int i = 1; i <= s.length(); i++) {
+			String subStr =  s.substring(0, i);
+			if(dict.contains(subStr)) {
+				if(wordBreakBF2(s.substring(i), dict)) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
 
+		
+		
 	public static void main(String[] args) {
 
 		Set<String> dict = new HashSet<String>();
@@ -61,13 +115,14 @@ public class WordBreak {
 		dict.addAll(Arrays.asList(strings));
 
 		WordBreak wb = new WordBreak();
-		String s = "aaaaaaaaaaaaaab";
-		System.out.println(wb.wordBreakBF(s, dict));
+		String s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
+		System.out.println(wb.wordBreak(s, dict));
 
+		
 		dict.clear();
 		dict.add("a");
 		dict.add("b");
 		s = "ab";
-		System.out.println(wb.wordBreakBF(s, dict));
+		System.out.println(wb.wordBreak(s, dict));
 	}
 }
