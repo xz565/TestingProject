@@ -5,10 +5,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-import sun.misc.Cache;
-
-import com.sun.jndi.url.ldaps.ldapsURLContextFactory;
-
 /*
  * Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
  * 
@@ -115,7 +111,7 @@ public class WordBreak {
 		dict.addAll(Arrays.asList(strings));
 
 		WordBreak wb = new WordBreak();
-		String s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
+		String s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
 		System.out.println(wb.wordBreak(s, dict));
 
 		
