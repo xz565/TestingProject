@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class SingleNumber {
 
-    public static int singleNumber(int[] A) {
+    public static int singleNumberWithExtraMemory(int[] A) {
 
     	Set<Integer> set = new HashSet<Integer>();
     	
@@ -37,4 +37,20 @@ public class SingleNumber {
     	}
     	return result;
     }
+    
+    public static int singleNumber(int[] A) {
+        
+    	int result = A[0];
+    	
+    	for(int i = 1; i < A.length; i++) {
+    		result = result^A[i];
+    	}
+    	
+    	return result;
+    }
+    
+    public static void main(String[] args) {
+		int[] A = {1,2,1};
+		System.out.println(singleNumber(A));
+	}
 }

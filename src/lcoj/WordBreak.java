@@ -14,14 +14,40 @@ import java.util.Set;
  */
 public class WordBreak {
 
+
+	// this is a standard DP solution
+	public boolean wordBreak(String s, Set<String> dict) {
+		
+		// dp[i] means sub string 0 to i can be broken
+		boolean[] dp = new boolean[s.length()];
+		
+		for(int i = 0; i < s.length(); i++) {
+			if(dict.contains(s.substring(0, i+1))) {
+				dp[i] = true;
+			}
+		}
+		
+		for(int i = 1; i < s.length(); i++) {
+			for(int j = 0; j < i; j++) {
+				if(dp[j] && dict.contains(s.substring(j + 1, i + 1))) {
+					dp[i] = true;
+				}
+			}
+		}
+		
+		return dp[s.length()-1];
+	}
+	
+	
+	// this is a tricky solution
+	// it's not like DP, more like a prune technology
 	Set<String> cache = new HashSet<String>();
 	
 	// DP solution
-	// The hardest part of DP problem is to abstract the repeation part of the algorithm and store them properly
+	// The hardest part of DP problem is to abstract the repetition part of the algorithm and store them properly
 	// 
-	public boolean wordBreak(String s, Set<String> dict) {
+	public boolean wordBreakPrune(String s, Set<String> dict) {
 
-		cache.clear();
 		if(s.isEmpty()) return true;
 		
 		boolean flag = false;
@@ -37,7 +63,7 @@ public class WordBreak {
 				if(cache.contains(suffix)) {
 					continue;
 				} else {
-					flag = wordBreak(suffix, dict);
+					flag = wordBreakPrune(suffix, dict);
 					
 					if(flag) {
 						return true; 
@@ -114,7 +140,7 @@ public class WordBreak {
 		String s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
 		System.out.println(wb.wordBreak(s, dict));
 
-		
+		wb.cache.clear();
 		dict.clear();
 		dict.add("a");
 		dict.add("b");
