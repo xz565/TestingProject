@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.list;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.bit;
 
 /**
  * Given an array of integers, every element appears three 
