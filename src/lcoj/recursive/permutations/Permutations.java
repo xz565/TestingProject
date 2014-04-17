@@ -1,4 +1,4 @@
-package lcoj.recursive;
+package lcoj.recursive.permutations;
 
 import java.util.ArrayList;
 import java.util.List;
