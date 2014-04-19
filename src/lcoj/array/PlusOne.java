@@ -8,28 +8,17 @@ import java.util.Arrays;
 public class PlusOne {
 
 	// what is the point of this question???
+	
+	// may be the point is to solve with as little lines of code as possible...
 	public int[] plusOne(int[] digits) {
 		
 		if(digits.length==0) return digits;
 
-		boolean carry = false;
 		for (int i = digits.length - 1; i >= 0; i--) {
 
 			int curt = digits[i];
 
-			// process least significant bit
-			if (i == digits.length - 1) {
-				if (curt == 9) {
-					digits[i] = 0;
-					carry = true;
-					continue;
-				} else {
-					digits[i] += 1;
-					return digits;
-				}
-			}
-
-			if (carry && curt == 9) {
+			if (curt == 9) {
 				digits[i] = 0;
 				continue;
 			} else {
@@ -48,7 +37,7 @@ public class PlusOne {
 	
 	public static void main(String[] args) {
 		PlusOne plusOne = new PlusOne();
-		int[] digits = {1, 9, 9};
+		int[] digits = {19};
 		System.out.println(Arrays.toString(plusOne.plusOne(digits )));
 	}
 }
