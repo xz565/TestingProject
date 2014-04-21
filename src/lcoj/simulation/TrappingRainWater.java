@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.simulation;
 
 /*
  * Input:	[4,2,0,3,2,5]
