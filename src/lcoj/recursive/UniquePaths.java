@@ -38,6 +38,7 @@ public class UniquePaths {
 
 	private int helper(int m, int n, int[][] cache) {
 		
+		// This condition is OR
 		if(m <= 1 || n <= 1) {
 			//cache[m][n] = 1;
     		return 1;
