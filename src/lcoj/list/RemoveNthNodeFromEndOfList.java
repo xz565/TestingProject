@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.list;
 
 import lcoj.common.ListNode;
 

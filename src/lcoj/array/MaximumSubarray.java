@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.array;
 
 /**
  * Find the contiguous subarray within an array (containing at least one number)
