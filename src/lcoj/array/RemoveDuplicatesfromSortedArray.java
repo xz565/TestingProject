@@ -1,5 +1,7 @@
 package lcoj.array;
 
+import java.util.Arrays;
+
 /*
  * Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
 
@@ -42,16 +44,29 @@ public class RemoveDuplicatesfromSortedArray {
 	// inplace one
     public int removeDuplicates(int[] A) {
     	
-    	return 0;
+    	if(A.length == 0) return 0;
+    	
+    	int count = 1;
+    	int prev = A[0];
+    	for(int i = 1; i < A.length; i++) {
+    		int curt = A[i];
+    		if(curt == prev) {
+    			continue;
+    		} else {
+    			A[count++] = curt;
+    			prev = curt;
+    		}
+    	}
+    	return count;
     }
 	
 	public static void main(String[] args) {
 		
-		int[] A = {1,1,2};
+		int[] A = {1,1,2,3,3,3,4,4,5};
 		
 		RemoveDuplicatesfromSortedArray r = new RemoveDuplicatesfromSortedArray();
 		System.out.println(r.removeDuplicates(A));
-		for(int i : A)
-			System.out.println(i);
+		System.out.println(Arrays.toString(A));
+
 	}
 }
