@@ -17,6 +17,7 @@ import java.util.Arrays;
 // (-2, 0, 0, 2)
 public class FourSum {
 
+  // there is a O(N^2) solution, so fucking smart!
   public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
 
     Arrays.sort(num);
@@ -24,5 +25,10 @@ public class FourSum {
 
 
     return results;
+  }
+
+
+  public static void main(String[] args) {
+
   }
 }

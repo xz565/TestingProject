@@ -8,5 +8,21 @@ package lcoj.search.binary;
 // Write a function to determine if a given target is in the array.
 public class SearchInRotatedSortedArrayII {
 
+  // got AC, but not making any sense
+  public boolean search2(int[] A, int target) {
 
+    for (int a : A) {
+      if (a == target) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  //
+  public boolean search(int[] A, int target) {
+
+    return false;
+  }
 }
