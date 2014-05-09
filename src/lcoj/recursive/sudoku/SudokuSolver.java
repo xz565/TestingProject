@@ -26,6 +26,13 @@ public class SudokuSolver {
 			return helper(board, row, col + 1);
 		} else {
 			Set<Character> set = new HashSet<Character>();
+			int gridRow = row / 3;
+			int gridCol = col / 3;
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					set.add(board[3 * gridRow + i][3 * gridCol + j]);
+				}
+			}
 			for (int i = 0; i < LEN; i++) {
 				set.add(board[row][i]);
 				set.add(board[i][col]);
@@ -33,11 +40,11 @@ public class SudokuSolver {
 			for (char i = '1'; i <= '9'; i++) {
 				if (!set.contains(i)) {
 					board[row][col] = i;
-					if (isValidSudoku(board)) {
-						if (helper(board, row, col + 1)) {
-							return true;
-						}
+					// if (isValidSudoku(board)) {
+					if (helper(board, row, col + 1)) {
+						return true;
 					}
+					// }
 				}
 			}
 			board[row][col] = '.';
