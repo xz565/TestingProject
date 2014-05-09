@@ -1,6 +1,7 @@
 package lcoj.recursive.sudoku;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import lcoj.common.Util;
 
@@ -10,6 +11,7 @@ public class SudokuSolver {
 
 	// simple back tracing approach
 	// too much duplication, need optimization
+	// use of isValidSudoku() is time consuming
 	public void solveSudoku(char[][] board) {
 		helper(board, 0, 0);
 	}
@@ -23,11 +25,18 @@ public class SudokuSolver {
 		} else if (board[row][col] != '.') {
 			return helper(board, row, col + 1);
 		} else {
+			Set<Character> set = new HashSet<Character>();
+			for (int i = 0; i < LEN; i++) {
+				set.add(board[row][i]);
+				set.add(board[i][col]);
+			}
 			for (char i = '1'; i <= '9'; i++) {
-				board[row][col] = i;
-				if (isValidSudoku(board)) {
-					if (helper(board, row, col + 1)) {
-						return true;
+				if (!set.contains(i)) {
+					board[row][col] = i;
+					if (isValidSudoku(board)) {
+						if (helper(board, row, col + 1)) {
+							return true;
+						}
 					}
 				}
 			}
@@ -36,7 +45,7 @@ public class SudokuSolver {
 		}
 	}
 
-	private boolean isValidSudoku(char[][] board) {
+	public boolean isValidSudoku(char[][] board) {
 
 		for (int i = 0; i < LEN; i++) {
 			// row
@@ -99,9 +108,22 @@ public class SudokuSolver {
 				{ '7', '.', '.', '.', '.', '.', '.', '.', '.' },
 				{ '8', '.', '.', '.', '.', '.', '.', '.', '.' },
 				{ '1', '.', '.', '.', '.', '.', '.', '.', '.' } };
+		char[][] board2 = { { '.', '.', '.', '.', '.', '7', '.', '.', '9' },
+				{ '.', '4', '.', '.', '8', '1', '2', '.', '.' },
+				{ '.', '.', '.', '9', '.', '.', '.', '1', '.' },
+				{ '.', '.', '5', '3', '.', '.', '.', '7', '2' },
+				{ '2', '9', '3', '.', '.', '.', '.', '5', '.' },
+				{ '.', '.', '.', '.', '.', '5', '3', '.', '.' },
+				{ '8', '.', '.', '.', '2', '3', '.', '.', '.' },
+				{ '7', '.', '.', '.', '5', '.', '.', '4', '.' },
+				{ '5', '3', '1', '.', '7', '.', '.', '.', '.' } };
+
 		Util.printMatrix(board);
+		Util.printMatrix(board2);
 		SudokuSolver solver = new SudokuSolver();
-		solver.solveSudoku(board);
-		Util.printMatrix(board);
+		long startTime = System.currentTimeMillis();
+		solver.solveSudoku(board2);
+		System.out.println("Time: " + (System.currentTimeMillis() - startTime));
+		Util.printMatrix(board2);
 	}
 }
