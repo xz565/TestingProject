@@ -1,4 +1,4 @@
-package lcoj.tree;
+package lcoj.tree.sum;
 
 import lcoj.common.TreeNode;
 
