@@ -26,14 +26,13 @@ public class TreeLinkNode {
     builder.append("TreeLinkNode [val=");
     builder.append(val);
     builder.append(", left=");
-    builder.append(left.val);
+    builder.append(left);
     builder.append(", right=");
-    builder.append(right.val);
+    builder.append(right);
     builder.append(", next=");
-    builder.append(next.val);
+    builder.append(next);
     builder.append("]");
     return builder.toString();
   }
-
 
 }

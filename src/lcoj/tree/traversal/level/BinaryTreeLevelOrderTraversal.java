@@ -1,4 +1,4 @@
-package lcoj.tree.traversal;
+package lcoj.tree.traversal.level;
 
 import java.util.ArrayList;
 
