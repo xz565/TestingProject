@@ -9,6 +9,8 @@ package lcoj.array;
 // Your algorithm should run in O(n) time and uses constant space.
 public class FirstMissingPositive {
 
+  // 常数空间的话，第一可以考虑是不是固定数量的几个变量能搞定；
+  // 否则可以考虑是不是问题本身已经提供了足够的空间。
   // use the array itself and index of the array
   // index i should store i+1
 

@@ -1,4 +1,4 @@
-package lcoj.recursive;
+package lcoj.recursive.nqueens;
 
 public class NQueensII {
 
