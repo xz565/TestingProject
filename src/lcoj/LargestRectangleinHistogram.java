@@ -1,6 +1,5 @@
 package lcoj;
 
-import java.util.Stack;
 
 // Given n non-negative integers representing the histogram's bar height
 // where the width of each bar is 1,
@@ -99,10 +98,10 @@ public class LargestRectangleinHistogram {
   // most optimized solution
   public int largestRectangleArea(int[] arr) {
 
-    Stack<Integer> stack = new Stack<Integer>();
-    for (int element : arr) {
-
-    }
+    // Stack<Integer> stack = new Stack<Integer>();
+    // for (int element : arr) {
+    //
+    // }
     return 0;
   }
 }
