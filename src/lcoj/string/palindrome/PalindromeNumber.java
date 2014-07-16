@@ -15,6 +15,7 @@ package lcoj.string.palindrome;
 // There is a more generic way of solving this problem.
 public class PalindromeNumber {
 
+  // though: / and % operations are useful when dealing with integer number
   // assumption: negative numbers are not palindrome
   public boolean isPalindrome(int x) {
 
@@ -23,22 +24,23 @@ public class PalindromeNumber {
     }
 
     int div = 1;
-    while (x / div > 10) {
+    while (x / div >= 10) { // this equal is important
       div *= 10;
     }
 
-    System.out.println(div);
-
+System.out.println(div);
     while (x != 0) {
+    	
+    	System.out.println(x);
       int lastBit = x % 10;
       int firstBit = x / div;
-
-      System.out.println(firstBit + " " + lastBit);
+System.out.println(lastBit + " " + firstBit);
       if (lastBit != firstBit) {
         return false;
       }
-      x = x - div - lastBit;
-      div = div / 100;
+      x = (x % div) / 10;
+      
+      div /= 100;
     }
 
     return true;
@@ -47,8 +49,18 @@ public class PalindromeNumber {
 
   public static void main(String[] args) {
 
-    int x = 1234321;
+    int x ;
     PalindromeNumber palindromeNumber = new PalindromeNumber();
+    
+//    x = 1234321;
+//    System.out.println(palindromeNumber.isPalindrome(x));
+//  
+//    x = 2147483647;
+//    System.out.println(palindromeNumber.isPalindrome(x));
+//    
+    x = 1001;
     System.out.println(palindromeNumber.isPalindrome(x));
+    
+    
   }
 }
