@@ -34,10 +34,16 @@ public class MultiplyStrings {
     int carry = 0;
     for (int i : arr) {
       i += carry;
-      if (i != 0) {
-        sb.insert(0, (i % 10));
-        carry = i / 10;
-      }
+      sb.insert(0, (i % 10));
+      carry = i / 10;
+    }
+
+    while (sb.length() != 0 && sb.charAt(0) == '0') {
+      sb.deleteCharAt(0);
+    }
+
+    if (sb.length() == 0) {
+      return "0";
     }
 
     return sb.toString();
@@ -48,8 +54,20 @@ public class MultiplyStrings {
 
     MultiplyStrings multiplyStrings = new MultiplyStrings();
 
-    String num1 = "123456789";
-    String num2 = "987654321";
+    String num1 = "6";
+    String num2 = "501";
+    System.out.println(multiplyStrings.multiply(num1, num2));
+
+    num1 = "12345";
+    num2 = "54321";
+    System.out.println(multiplyStrings.multiply(num1, num2));
+
+    num1 = "0";
+    num2 = "0";
+    System.out.println(multiplyStrings.multiply(num1, num2));
+
+    num1 = "0";
+    num2 = "9133";
     System.out.println(multiplyStrings.multiply(num1, num2));
   }
 }
