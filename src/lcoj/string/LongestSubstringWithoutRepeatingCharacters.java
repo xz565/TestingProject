@@ -22,9 +22,6 @@ public class LongestSubstringWithoutRepeatingCharacters {
     int tail = 0;
     set.add(s.charAt(0));
 
-    String max = s.substring(0, 1);
-
-
     // this is also a popular for loop style
     // just like a while loop
     for (tail = 1 ; tail < s.length() ;) {
@@ -37,7 +34,6 @@ public class LongestSubstringWithoutRepeatingCharacters {
         int temp = tail - head;
         if (temp > maxLen) {
           maxLen = temp;
-          max = s.substring(head, tail);
         }
 
       } else {
