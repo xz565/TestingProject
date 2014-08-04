@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.string.rtoi;
 
 import java.util.HashMap;
 import java.util.Map;

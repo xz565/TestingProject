@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.string.rtoi;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

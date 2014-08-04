@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.recursive;
 
 import java.util.ArrayList;
 import java.util.List;

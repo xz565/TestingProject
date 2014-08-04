@@ -1,7 +1,7 @@
 package lcojtest;
 
 import static org.junit.Assert.assertEquals;
-import lcoj.WordSearch;
+import lcoj.recursive.WordSearch;
 
 import org.junit.Test;
 

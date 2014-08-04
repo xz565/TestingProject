@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.string;
 
 import java.util.Arrays;
 import java.util.Stack;

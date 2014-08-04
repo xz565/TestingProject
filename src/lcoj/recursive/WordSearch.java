@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.recursive;
 
 /*
  * [ ["ABCE"], ["SFCS"], ["ADEE"] ]
