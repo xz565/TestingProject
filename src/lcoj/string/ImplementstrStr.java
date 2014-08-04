@@ -2,17 +2,25 @@ package lcoj.string;
 
 // Implement strStr().
 //
-// Returns a pointer to the first occurrence of needle in haystack, or null if needle is not part of haystack.
+// Returns a pointer to the first occurrence of needle in haystack,
+// or null if needle is not part of haystack.
 public class ImplementstrStr {
 
   // BF solution
-  public String strStr(String haystack, String needle) {
+  // O(M*N) too expensive
+  // but still got ACed
+  public String strStr_BAD(String haystack, String needle) {
 
     if (haystack.length() < needle.length()) {
       return null;
     }
+    if (needle.isEmpty()) {
+      return haystack;
+    }
 
-    for (int i = 0 ; i < haystack.length() ; i++) {
+    // here used a little pruning trick to get ACed
+    int i;
+    outer: for (i = 0 ; i <= haystack.length() - needle.length() ; i++) {
       int iTemp = i;
       for (int j = 0 ; j < needle.length() ; j++) {
         if (iTemp < haystack.length() && needle.charAt(j) == haystack.charAt(iTemp)) {
@@ -22,10 +30,25 @@ public class ImplementstrStr {
         }
 
         if (j == needle.length() - 1) {
-          return needle;
+          // return needle;
+          break outer;
         }
       }
     }
+
+    if (i > haystack.length() - needle.length()) {
+      return null;
+    }
+    return haystack.substring(i);
+  }
+
+
+  // Most optimized algorithm is the KMP algorithm, but too complex to implement
+  // another liner algorithm is called liner hash
+  //
+  // This question is actually the whole Chapter 32 of Introduction to Algorithm
+  // Find some time to read
+  public String strStr(String haystack, String needle) {
 
     return null;
   }
@@ -33,9 +56,14 @@ public class ImplementstrStr {
 
   public static void main(String[] args) {
 
+    ImplementstrStr impl = new ImplementstrStr();
+
     String haystack = "BBC ABCDAB ABCDABCDABDE";
     String needle = "ABCDABD";
-    ImplementstrStr impl = new ImplementstrStr();
-    System.out.println(impl.strStr(haystack, needle));
+    // System.out.println(impl.strStr_TLE(haystack, needle));
+
+    haystack = "mississippi";
+    needle = "issipi";
+    System.out.println(impl.strStr_BAD(haystack, needle));
   }
 }
