@@ -56,6 +56,6 @@ public class Permutations {
 
     Permutations p = new Permutations();
     int[] num = { 1, 2, 3, 4 };
-    System.out.println(p.permute(num).size());
+    System.out.println(p.permute(num));
   }
 }
