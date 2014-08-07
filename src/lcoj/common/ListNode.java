@@ -28,6 +28,8 @@ public class ListNode {
       head = head.next;
     }
     sb.append("null");
+
+    System.out.println(sb);
     return sb.toString();
   }
 
