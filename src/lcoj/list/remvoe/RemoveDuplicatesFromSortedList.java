@@ -1,4 +1,4 @@
-package lcoj.list;
+package lcoj.list.remvoe;
 
 import lcoj.common.ListNode;
 
