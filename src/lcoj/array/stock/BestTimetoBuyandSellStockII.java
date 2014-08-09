@@ -1,4 +1,4 @@
-package lcoj.array;
+package lcoj.array.stock;
 
 public class BestTimetoBuyandSellStockII {
 	
