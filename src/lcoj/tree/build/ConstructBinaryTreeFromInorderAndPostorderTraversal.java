@@ -1,4 +1,4 @@
-package lcoj.tree.traversal;
+package lcoj.tree.build;
 
 import java.util.Arrays;
 
