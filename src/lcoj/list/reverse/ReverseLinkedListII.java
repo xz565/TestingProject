@@ -14,8 +14,50 @@ import lcoj.common.ListNode;
 // 1 ≤ m ≤ n ≤ length of list.
 public class ReverseLinkedListII {
 
-  // not neat, need to find a neat solution
   public static ListNode reverseBetween(ListNode head, int m, int n) {
+
+    if (head == null || n == 1) {
+      return head;
+    }
+
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+
+    ListNode mNode = dummy; // m-1 th node
+    ListNode nNode = dummy.next; // n + 1 th node
+
+    int count = 0;
+    while (mNode != null && nNode != null) {
+      count++;
+      if (count < m) {
+        mNode = mNode.next;
+        nNode = nNode.next;
+      } else if (count >= m && count < n) {
+        nNode = nNode.next;
+      } else { // count >= n
+        break;
+      }
+    }
+    nNode = nNode.next;
+
+    ListNode prev = mNode;
+    ListNode last = prev.next;
+    ListNode curt = last.next;
+
+    while (curt != nNode) {
+      last.next = curt.next;
+      curt.next = prev.next;
+      prev.next = curt;
+      curt = last.next;
+    }
+
+    return dummy.next;
+  }
+
+
+  // not neat, need to find a neat solution
+  // so ugly !!!!!!!!!!
+  public static ListNode reverseBetween_Bad(ListNode head, int m, int n) {
 
     // first step is to find the m-th and n-th node
     ListNode mNode = null;
@@ -68,12 +110,12 @@ public class ReverseLinkedListII {
   public static void main(String[] args) {
 
     ListNode head = new ListNode(1);
-    // head.next = new ListNode(2);
-    // head.next.next = new ListNode(3);
+    head.next = new ListNode(2);
+    head.next.next = new ListNode(3);
     // head.next.next.next = new ListNode(4);
     // head.next.next.next.next = new ListNode(5);
 
-    ListNode rst = reverseBetween(head, 1, 1);
+    ListNode rst = reverseBetween(head, 2, 3);
     ListNode.printListNode(rst);
   }
 }
