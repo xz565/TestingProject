@@ -133,7 +133,7 @@ public class JumpGameII {
     // B[i] = 25000 - i;
     // }
     int[] B = { 3, 4, 3, 1, 0, 7, 0, 3, 0, 2, 0, 3 };
-    long startTime = System.currentTimeMillis();
+    // long startTime = System.currentTimeMillis();
     System.out.println(jumpGameII.jump(B));
     // System.out.println(System.currentTimeMillis() - startTime);
 
