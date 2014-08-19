@@ -1,4 +1,4 @@
-package lcoj.string;
+package lcoj.string.window;
 
 import java.util.HashMap;
 import java.util.HashSet;

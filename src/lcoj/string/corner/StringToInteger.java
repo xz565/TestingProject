@@ -1,4 +1,4 @@
-package lcoj.string;
+package lcoj.string.corner;
 /**
  * Implement atoi to convert a string to an integer.
  * 
