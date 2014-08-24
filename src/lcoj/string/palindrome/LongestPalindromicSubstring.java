@@ -18,6 +18,9 @@ public class LongestPalindromicSubstring {
   // Here we implememnt the O(N^2) solution with constant space
 
   // next round, try to understand and implement Manacher's algorithm
+
+  // simple though, at each position, check left and right until unmatched
+  // and keep the longest
   public String longestPalindrome(String s) {
 
     if (s == null || s.length() == 0) {
