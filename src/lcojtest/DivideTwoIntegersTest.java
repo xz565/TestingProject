@@ -1,7 +1,7 @@
 package lcojtest;
 
 import static org.junit.Assert.assertEquals;
-import lcoj.DivideTwoIntegers;
+import lcoj.math.DivideTwoIntegers;
 
 import org.junit.Test;
 

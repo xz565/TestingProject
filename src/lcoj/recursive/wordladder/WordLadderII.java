@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.recursive.wordladder;
 
 import java.util.ArrayList;
 import java.util.Arrays;

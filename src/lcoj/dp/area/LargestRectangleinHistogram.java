@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.dp.area;
 
 
 // Given n non-negative integers representing the histogram's bar height

@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.math;
 
 public class DivideTwoIntegers {
 

@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.dp.area;
 
 
 //Given n non-negative integers a1, a2, ..., an, 
@@ -22,10 +22,10 @@ public class ContainerWithMostWater {
 
 		// This is actually not corrent thought
 		// need some smart to work this out!
-		// 当从两边向中间考虑时，乘水的面积是由（两端较小的高度）×（两个板之间的宽度）决定的。
-		// 记录最开始的乘水面积为ans1，然后L向右运动，R向左运动，截止条件是L >= R,并且记录乘水的面积ans，取最大值
+		// 当从两边�?�中间考虑时，乘水的�?�积是由（两端较�?的高度）×（两个�?�之间的宽度）决定的。
+		// 记录最开始的乘水�?�积为ans1，然�?�L�?��?��?动，R�?�左�?动，截止�?�件是L >= R,并且记录乘水的�?�积ans，�?�最大值
 		//
-		// 以L向左运动为例，当宽度减小时，如果面积变大，必然高度要增加，因此L只需取比前一个L大的值即可，初始L的高度为L1。R向右运动同理
+		// 以L�?�左�?动为例，当宽度�?�?时，如果�?�积�?�大，必然高度�?增加，因此L�?�需�?�比�?一个L大的值�?��?�，�?始L的高度为L1。R�?��?��?动�?��?�
 		int len = height.length;
 		int leftH = height[0];
 		int leftHIdx = 0;
