@@ -1,5 +1,7 @@
 package lcoj.dp.area;
 
+import java.util.Stack;
+
 
 // Given n non-negative integers representing the histogram's bar height
 // where the width of each bar is 1,
@@ -91,17 +93,47 @@ public class LargestRectangleinHistogram {
     // int[] arr = { 2147483647 };
     int[] arr = { 2, 1, 5, 6, 2, 3 };
     LargestRectangleinHistogram largestRectangleinHistogram = new LargestRectangleinHistogram();
-    System.out.println(largestRectangleinHistogram.largestRectangleArea(arr));
+    System.out.println(largestRectangleinHistogram.largestRectangleArea_Prune(arr));
+
+    int[] arr2 = { 2, 2, 2, 2 };
+    System.out.println(largestRectangleArea(arr2));
   }
 
 
   // most optimized solution
-  public int largestRectangleArea(int[] arr) {
+  public static int largestRectangleArea(int[] arr) {
 
-    // Stack<Integer> stack = new Stack<Integer>();
-    // for (int element : arr) {
-    //
-    // }
-    return 0;
+    Stack<Integer> stack = new Stack<Integer>();
+    int max = 0;
+
+    for (int curt : arr) {
+
+      if (stack.isEmpty() || stack.peek() <= curt) {
+        stack.push(curt);
+
+      } else {
+
+        int count = 1;
+        while (!stack.isEmpty() && curt < stack.peek()) {
+          // stack.pop();
+          max = Math.max(max, count * stack.pop());
+          count++;
+
+        }
+
+        for (int i = 1 ; i <= count ; i++) {
+          stack.push(curt);
+        }
+
+      }
+    }
+
+    int len = 1;
+    while (!stack.isEmpty()) {
+      max = Math.max(max, len * stack.pop());
+      len++;
+    }
+
+    return max;
   }
 }
