@@ -7,7 +7,8 @@ import java.util.List;
 // Given a set of candidate numbers (C) and a target number (T),
 // find all unique combinations in C where the candidate numbers sums to T.
 //
-// The same repeated number may be chosen from C unlimited number of times.
+// The same repeated number may be chosen from C
+// UNLIMITED number of times.
 //
 // Note:
 // All numbers (including target) will be positive integers.
@@ -36,16 +37,14 @@ public class CombinationSum {
 
   private void helper(int[] candidates, int idx, int target, List<Integer> tempList, List<List<Integer>> result) {
 
+    System.out.println(tempList);
+
     if (target < 0 || idx < 0) {
       return;
     }
 
     if (target == 0) {
-      List<Integer> list = new ArrayList<Integer>();
-      for (int i = tempList.size() - 1 ; i >= 0 ; i--) {
-        list.add(tempList.get(i));
-      }
-      result.add(list);
+      result.add(new ArrayList<Integer>(tempList));
     }
 
     for (int i = idx ; i >= 0 ; i--) {
@@ -58,8 +57,8 @@ public class CombinationSum {
 
   public static void main(String[] args) {
 
-    int[] arr = { 2, 3, 4, 7 };
+    int[] arr = { 1, 2 };
     CombinationSum com = new CombinationSum();
-    System.out.println(com.combinationSum(arr, 7));
+    System.out.println(com.combinationSum(arr, 3));
   }
 }

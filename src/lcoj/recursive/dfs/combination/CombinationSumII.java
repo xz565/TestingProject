@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// Given a collection of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
+// Given a collection of candidate numbers (C) and a target number (T),
+// find all unique combinations in C where the candidate numbers sums to T.
 //
-// Each number in C may only be used once in the combination.
+// Each number in C may only be used ONCE in the combination.
 //
 // Note:
 // All numbers (including target) will be positive integers.
@@ -35,14 +36,10 @@ public class CombinationSumII {
 
   private void helper(int[] candidates, int idx, int target, List<Integer> tempList, List<List<Integer>> result) {
 
+    System.out.println(tempList);
+
     if (target == 0) {
-      List<Integer> list = new ArrayList<Integer>();
-      for (int i = tempList.size() - 1 ; i >= 0 ; i--) {
-        list.add(tempList.get(i));
-      }
-      if (!result.contains(list)) {
-        result.add(list);
-      }
+      result.add(new ArrayList<Integer>(tempList));
     }
 
     if (target < 0 || idx < 0) {
@@ -50,17 +47,23 @@ public class CombinationSumII {
     }
 
     for (int i = idx ; i >= 0 ; i--) {
-      tempList.add(candidates[i]);
+      tempList.add(0, candidates[i]);
       helper(candidates, i - 1, target - candidates[i], tempList, result);
-      tempList.remove(tempList.size() - 1);
+      tempList.remove(0);
+
+      // all the cases for second 1 will be covered by first
+      // think throughout and carefully
+      while (i - 1 >= 0 && candidates[i] == candidates[i - 1]) {
+        i--;
+      }
     }
   }
 
 
   public static void main(String[] args) {
 
-    int[] arr = { 1, 1, 2, 5, 6, 7, 10 };
+    int[] arr = { 1, 1, 2 };
     CombinationSumII com = new CombinationSumII();
-    System.out.println(com.combinationSum2(arr, 8));
+    System.out.println(com.combinationSum2(arr, 5));
   }
 }
