@@ -1,4 +1,4 @@
-package lcoj.graph;
+package lcoj.recursive.dfs;
 
 import java.util.HashMap;
 import java.util.Map;

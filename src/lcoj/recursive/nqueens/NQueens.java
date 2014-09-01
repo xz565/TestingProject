@@ -46,6 +46,9 @@ public class NQueens {
 		}
 	}
 
+	// This is not the simplest validation
+	// only need to validate each previous row with current row
+	// so one for loop is enough
 	private static boolean valide(int[] board, int currentRow) {
 		
 		for(int i = 0; i <= currentRow - 1; i++) {

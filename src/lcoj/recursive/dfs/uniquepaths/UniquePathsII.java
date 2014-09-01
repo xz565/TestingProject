@@ -1,4 +1,4 @@
-package lcoj.recursive;
+package lcoj.recursive.dfs.uniquepaths;
 
 //Follow up for "Unique Paths":
 //
