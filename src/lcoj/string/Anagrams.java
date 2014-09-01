@@ -11,6 +11,7 @@ import java.util.Map;
 // Note: All inputs will be in lower-case.
 public class Anagrams {
 
+  // Time complexity O(N*MlgM) where M is the max length of string in strs
   public List<String> anagrams(String[] strs) {
 
     Map<String, List<String>> map = new HashMap<String, List<String>>();

@@ -1,4 +1,4 @@
-package lcoj.recursive.permutations;
+package lcoj.recursive.dfs.permutation;
 
 import java.util.ArrayList;
 import java.util.List;

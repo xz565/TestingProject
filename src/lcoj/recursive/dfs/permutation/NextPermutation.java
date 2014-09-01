@@ -1,4 +1,4 @@
-package lcoj.recursive.permutations;
+package lcoj.recursive.dfs.permutation;
 
 
 // Implement next permutation, which rearranges numbers into the

@@ -1,4 +1,4 @@
-package lcoj.recursive.combination;
+package lcoj.recursive.dfs.combination;
 
 import java.util.ArrayList;
 import java.util.Arrays;

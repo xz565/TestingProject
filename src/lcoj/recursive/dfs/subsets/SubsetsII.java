@@ -1,4 +1,4 @@
-package lcoj.recursive.subsets;
+package lcoj.recursive.dfs.subsets;
 
 import java.util.ArrayList;
 import java.util.Arrays;
