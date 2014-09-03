@@ -107,15 +107,48 @@ public class ReverseLinkedListII {
   }
 
 
+  // 个人风格终极版
+  public static ListNode reverseBetween2(ListNode head, int m, int n) {
+
+    if (head == null) {
+      return head;
+    }
+
+    ListNode dummyNode = new ListNode(0);
+    dummyNode.next = head;
+
+    int i = 1;
+    ListNode prev = dummyNode;
+    while (i < m) {
+      prev = prev.next;
+      i++;
+    }
+
+    ListNode tail = prev.next;
+    ListNode curt = tail.next;
+    while (i < n) {
+
+      tail.next = curt.next;
+      curt.next = prev.next;
+      prev.next = curt;
+
+      curt = tail.next;
+      i++;
+    }
+
+    return dummyNode.next;
+  }
+
+
   public static void main(String[] args) {
 
     ListNode head = new ListNode(1);
-    head.next = new ListNode(2);
-    head.next.next = new ListNode(3);
+    // head.next = new ListNode(2);
+    // head.next.next = new ListNode(3);
     // head.next.next.next = new ListNode(4);
     // head.next.next.next.next = new ListNode(5);
 
-    ListNode rst = reverseBetween(head, 2, 3);
+    ListNode rst = reverseBetween2(head, 1, 1);
     ListNode.printListNode(rst);
   }
 }

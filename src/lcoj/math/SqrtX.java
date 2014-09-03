@@ -1,4 +1,4 @@
-package lcoj.search.binary;
+package lcoj.math;
 
 // Implement int sqrt(int x).
 //
@@ -15,7 +15,9 @@ public class SqrtX {
   public int sqrt(int x) {
 
     long i = 0;
-    long j = x / 2 + 1; // why increased by one ???
+    // why increased by one ???
+    // think if x is 1, x/2 = 0, so need to add one.
+    long j = x / 2 + 1;
 
     while (i <= j) {
       long mid = (i + j) / 2;

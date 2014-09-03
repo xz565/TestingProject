@@ -1,4 +1,4 @@
-package lcoj.search.binary;
+package lcoj.math;
 
 // Implement pow(x, n).
 public class PowXN {
