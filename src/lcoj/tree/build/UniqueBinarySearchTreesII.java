@@ -1,4 +1,4 @@
-package lcoj.tree.uniquebst;
+package lcoj.tree.build;
 
 import java.util.ArrayList;
 import java.util.List;
