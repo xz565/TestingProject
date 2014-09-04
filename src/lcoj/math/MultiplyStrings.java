@@ -1,4 +1,6 @@
-package lcoj.string;
+package lcoj.math;
+
+import java.util.Arrays;
 
 
 // Given two numbers represented as strings, return multiplication of the numbers as a string.
@@ -15,6 +17,7 @@ public class MultiplyStrings {
   // To solve this problem simple and fast, some other tricks can also be applied
   // we can utilize the index to proper set the value in each bit
   // 我只能说，这个算法碉堡了!!
+  // This algorithm uses a very good observation about multiply.
   public String multiply(String num1, String num2) {
 
     StringBuffer sb = new StringBuffer();
@@ -31,6 +34,9 @@ public class MultiplyStrings {
         arr[i + j] += a * b;
       }
     }
+
+    System.out.println(Arrays.toString(arr));
+
     int carry = 0;
     for (int i : arr) {
       i += carry;
@@ -38,12 +44,10 @@ public class MultiplyStrings {
       carry = i / 10;
     }
 
-    while (sb.length() != 0 && sb.charAt(0) == '0') {
-      sb.deleteCharAt(0);
-    }
+    System.out.println(sb.toString());
 
-    if (sb.length() == 0) {
-      return "0";
+    while (sb.length() > 1 && sb.charAt(0) == '0') {
+      sb.deleteCharAt(0);
     }
 
     return sb.toString();
