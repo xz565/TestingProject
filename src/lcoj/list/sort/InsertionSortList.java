@@ -39,6 +39,7 @@ public class InsertionSortList {
 
 
   // This is much better solution
+  // It's insertion sort, use a separate head node, made things easier
   public ListNode insertionSortList(ListNode head) {
 
     ListNode helper = new ListNode(0);
@@ -67,7 +68,7 @@ public class InsertionSortList {
 
     ListNode head = new ListNode(3);
     head.next = new ListNode(5);
-    head.next.next = new ListNode(1);
+    // head.next.next = new ListNode(1);
 
     InsertionSortList insertionSortList = new InsertionSortList();
     head = insertionSortList.insertionSortList(head);

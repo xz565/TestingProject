@@ -1,5 +1,6 @@
 package lcoj.string.palindrome;
 
+
 // Given a string S, find the longest palindromic substring in S.
 // You may assume that the maximum length of S is 1000,
 // and there exists one unique longest palindromic substring.
@@ -55,10 +56,58 @@ public class LongestPalindromicSubstring {
   }
 
 
+  public String longestPalindrome_dp(String s) {
+
+    int len = s.length();
+
+    int startIdx = 0;
+    int maxLen = 0;
+
+    boolean[][] dp = new boolean[len][len];
+
+    for (int i = 0 ; i < len ; i++) {
+      dp[i][i] = true;
+
+      startIdx = i;
+      maxLen = 1;
+    }
+
+    for (int i = 0 ; i < len ; i++) {
+      if (i + 1 < len && s.charAt(i) == s.charAt(i + 1)) {
+        dp[i][i + 1] = true;
+
+        startIdx = i;
+        maxLen = 2;
+      }
+    }
+
+
+    for (int l = 3 ; l <= len ; l++) {
+      for (int start = 0 ; start < len - l + 1 ; start++) {
+
+        if (s.charAt(start) == s.charAt(start + l - 1) && dp[start + 1][start + l - 2]) {
+          dp[start][start + l - 1] = true;
+
+          startIdx = start;
+          maxLen = l;
+        }
+      }
+    }
+
+
+    // System.out.println(startIdx + " " + maxLen);
+
+    return s.substring(startIdx, startIdx + maxLen);
+  }
+
+
   public static void main(String[] args) {
 
     LongestPalindromicSubstring longestPalindromicSubstring = new LongestPalindromicSubstring();
     String str = "abcdcbaa";
-    System.out.println(longestPalindromicSubstring.longestPalindrome(str));
+    // System.out.println(longestPalindromicSubstring.longestPalindrome_dp(str));
+
+    str = "ccc";
+    System.out.println(longestPalindromicSubstring.longestPalindrome_dp(str));
   }
 }
