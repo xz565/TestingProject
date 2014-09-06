@@ -33,6 +33,11 @@ public class PalindromePartitioningII {
 
     // helper[i][j] means substring between i and j is palindrome
     // recursion function is helper[i][j] = (helper[i+1][j-1] && s[i] == s[j]) || (j-i<2) &&s[i] == s[j])
+    // 这个解法真是看一次给大神跪一次
+    // 因为递归式用到了i用到了i+1的值，所以从左往右遍历不行
+    // 所以一下i 从 s 的末尾开始往前遍历。。。巧妙的简化了这一问题
+    // 参照 LongestPalindromicSubstring 这题的dp解法，从右往左简单了好多
+
     //
     // dp[i] means min cut between i and end of string
     // recursion function is dp[i] = min(dp[i], dp[j+1]+1) if helper[i][j] is true

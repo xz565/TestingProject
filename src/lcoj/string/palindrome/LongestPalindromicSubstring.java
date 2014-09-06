@@ -56,6 +56,7 @@ public class LongestPalindromicSubstring {
   }
 
 
+  // dp from left to right
   public String longestPalindrome_dp(String s) {
 
     int len = s.length();
@@ -101,13 +102,44 @@ public class LongestPalindromicSubstring {
   }
 
 
+  // 根据 PalindromePartitioningII 这道题的流弊解法，给出一更简洁的dp
+  // dp from right to left, more neat and less error
+  public String longestPalindrome_dp2(String s) {
+
+    int len = s.length();
+
+    boolean[][] dp = new boolean[len][len];
+
+    int start = 0;
+    int end = 0;
+    int max = 0;
+
+    for (int i = s.length() - 1 ; i >= 0 ; i--) {
+      for (int j = i ; j < s.length() ; j++) {
+        if (s.charAt(i) == s.charAt(j) && (j - i < 2 || dp[i + 1][j - 1])) {
+
+          dp[i][j] = true;
+
+          if (j - i > max) {
+            max = j - i;
+            start = i;
+            end = j;
+          }
+        }
+      }
+    }
+
+    return s.substring(start, end + 1);
+  }
+
+
   public static void main(String[] args) {
 
     LongestPalindromicSubstring longestPalindromicSubstring = new LongestPalindromicSubstring();
     String str = "abcdcbaa";
-    // System.out.println(longestPalindromicSubstring.longestPalindrome_dp(str));
+    System.out.println(longestPalindromicSubstring.longestPalindrome_dp2(str));
 
     str = "ccc";
-    System.out.println(longestPalindromicSubstring.longestPalindrome_dp(str));
+    System.out.println(longestPalindromicSubstring.longestPalindrome_dp2(str));
   }
 }
