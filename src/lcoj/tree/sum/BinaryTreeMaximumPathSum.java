@@ -69,6 +69,32 @@ public class BinaryTreeMaximumPathSum {
     return pathMax;
   }
 
+  int max;
+
+
+  public int maxPathSum2(TreeNode root) {
+
+    max = Integer.MIN_VALUE;
+    helper(root);
+    return max;
+  }
+
+
+  private int helper(TreeNode root) {
+
+    if (root == null) {
+      return 0;
+    }
+
+    int lMax = Math.max(helper(root.left), 0);
+    int rMax = Math.max(helper(root.right), 0);
+
+    int localMax = root.val + lMax + rMax;
+    max = Math.max(max, localMax);
+
+    return root.val + Math.max(rMax, rMax);
+  }
+
 
   public static void main(String[] args) {
 
@@ -82,6 +108,6 @@ public class BinaryTreeMaximumPathSum {
     root.right = new TreeNode(3);
 
     BinaryTreeMaximumPathSum binaryTreeMaximumPathSum = new BinaryTreeMaximumPathSum();
-    System.out.println(binaryTreeMaximumPathSum.maxPathSum(root));
+    System.out.println(binaryTreeMaximumPathSum.maxPathSum2(root));
   }
 }
