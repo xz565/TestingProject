@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public class IntegerToRoman {
 
+  // this solution looks like a cheating one...
   public String intToRoman(int num) {
 
     Map<Integer, String> map = new LinkedHashMap<Integer, String>();
