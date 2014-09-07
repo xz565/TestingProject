@@ -42,17 +42,33 @@ public class ImplementstrStr {
     return haystack.substring(i);
   }
 
+  // better implementation
+  public String strStr(String haystack, String needle) {
+      if(haystack == null || needle == null) {
+          return null;
+      } else if(needle.length() == 0) {
+          return haystack;
+      }
+      
+      for(int haystackIdx = 0; haystackIdx <= haystack.length() - needle.length(); haystackIdx++) {
+          for(int needleIdx = 0; needleIdx < needle.length(); needleIdx++) {
+              if(haystack.charAt(haystackIdx + needleIdx) != needle.charAt(needleIdx)) {
+                  break;
+              }
+              if(needleIdx == needle.length() - 1) {
+                  return haystack.substring(haystackIdx);
+              }
+          }
+      }
+      
+      return null;
+  }
 
   // Most optimized algorithm is the KMP algorithm, but too complex to implement
   // another liner algorithm is called liner hash
   //
   // This question is actually the whole Chapter 32 of Introduction to Algorithm
   // Find some time to read
-  public String strStr(String haystack, String needle) {
-
-    return null;
-  }
-
 
   public static void main(String[] args) {
 
