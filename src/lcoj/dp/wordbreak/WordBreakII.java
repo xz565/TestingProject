@@ -1,4 +1,4 @@
-package lcoj.dp.workbreak;
+package lcoj.dp.wordbreak;
 
 import java.util.ArrayList;
 import java.util.HashMap;

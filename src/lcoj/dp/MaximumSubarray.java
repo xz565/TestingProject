@@ -1,4 +1,4 @@
-package lcoj.array;
+package lcoj.dp;
 
 /**
  * Find the contiguous subarray within an array (containing at least one number)
@@ -30,6 +30,20 @@ public class MaximumSubarray {
 
 		return max;
 	}
+	
+	// more clear DP solution
+    public int maxSubArray2(int[] A) {
+        
+        int[] cache = new int[A.length + 1];
+        // max[i] = max(0, max[i-1] + A[i])
+        int max = A[0];
+        for(int i = 1; i <= A.length; i++) {
+            cache[i] = Math.max(A[i-1], cache[i-1] + A[i-1]);
+            max = Math.max(cache[i], max);
+        }
+        
+        return max;
+    }
 
 	// O(N^2)
 	public int maxSubArrayBad(int[] A) {

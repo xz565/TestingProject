@@ -1,4 +1,4 @@
-package lcoj.array;
+package lcoj.array.matrix;
 
 import java.util.ArrayList;
 
