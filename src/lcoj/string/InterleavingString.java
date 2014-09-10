@@ -91,7 +91,69 @@ public class InterleavingString {
     return dp[s1.length()][s2.length()];
   }
 
+  public static boolean isInterleave_TLE2(String s1, String s2, String s3) {
+	  
+      if(s1 == null || s2 == null || s3 == null) {
+          return false;
+      }
+      if(s1.isEmpty() && s2.isEmpty() && s3.isEmpty()) {
+          return true;
+      }
+      if(s1.length() + s2.length() != s3.length()) {
+          return false;
+      }
+      
+      boolean s1Match = false;
+      if(!s1.isEmpty() && s1.charAt(0) == s3.charAt(0)) {
+          s1Match = isInterleave_TLE2(s1.substring(1), s2, s3.substring(1));
+      }
+      
+      boolean s2Match = false;
+      if(!s2.isEmpty() && s2.charAt(0) == s3.charAt(0)) {
+          s2Match = isInterleave_TLE2(s1, s2.substring(1), s3.substring(1));
+      }
+      
+      return s1Match || s2Match;
+  }
 
+  public static boolean isInterleave2(String s1, String s2, String s3) {
+      
+      if(s1.length() + s2.length() != s3.length()) {
+          return false;
+      }
+      
+      boolean[][] dp = new boolean[s1.length() + 1][s2.length() + 1];
+      dp[0][0] = true;
+
+      for(int i = 0; i < s1.length(); i++) {
+          if(s1.charAt(i) == s3.charAt(i)) {
+              dp[i+1][0] = true;
+          } else {
+              break;
+          }
+      }
+      
+      for(int i = 0; i < s2.length(); i++) {
+          if(s2.charAt(i) == s3.charAt(i)) {
+              dp[0][i+1] = true;
+          } else {    
+              break;
+          }
+      }
+      
+      for(int i = 1; i <= s1.length(); i++) {
+          for(int j = 1; j <= s2.length(); j++) {
+              if(s1.charAt(i-1) == s3.charAt(i+j-1) && dp[i-1][j]) {
+                  dp[i][j] = true;
+              } else if(s2.charAt(j-1) == s3.charAt(i+j-1) && dp[i][j-1]) {
+                  dp[i][j] = true;
+              }
+          }
+      }
+      
+      return dp[s1.length()][s2.length()];
+  }
+  
   public static void main(String[] args) {
 
     String s1 = "aa";
@@ -102,7 +164,18 @@ public class InterleavingString {
     s1 = "aabcc";
     s2 = "dbbca";
     s3 = "aadbbcbcac";
-    System.out.println(isInterleave(s1, s2, s3));
+//    System.out.println(isInterleave(s1, s2, s3));
 
+    
+    s1 = "abbbbbbcabbacaacccababaabcccabcacbcaabbbacccaaaaaababbbacbb";
+    s2 = "ccaacabbacaccacababbbbabbcacccacccccaabaababacbbacabbbbabc";
+    s3 = "cacbabbacbbbabcbaacbbaccacaacaacccabababbbababcccbabcabbaccabcccacccaabbcbcaccccaaaaabaaaaababbbbacbbabacbbacabbbbabc";
+    long start = System.currentTimeMillis();
+    System.out.println(isInterleave_TLE2(s1, s2, s3));
+    System.out.println(System.currentTimeMillis() - start);
+    
+    start = System.currentTimeMillis();
+    System.out.println(isInterleave2(s1, s2, s3));
+    System.out.println(System.currentTimeMillis() - start);
   }
 }
