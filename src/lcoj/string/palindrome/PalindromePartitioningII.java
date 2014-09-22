@@ -21,7 +21,7 @@ public class PalindromePartitioningII {
   // but need a two dimension map for help
 
 
-  // 真是要给大神跪了，这么高端的解法。。
+  // çœŸæ˜¯è¦�ç»™å¤§ç¥žè·ªäº†ï¼Œè¿™ä¹ˆé«˜ç«¯çš„è§£æ³•ã€‚ã€‚
 
   // This helper dp can also be applied to the first solution
   // after build the helper array, we need to apply DSF to find all the possible cuts
@@ -33,15 +33,15 @@ public class PalindromePartitioningII {
 
     // helper[i][j] means substring between i and j is palindrome
     // recursion function is helper[i][j] = (helper[i+1][j-1] && s[i] == s[j]) || (j-i<2) &&s[i] == s[j])
-    // 这个解法真是看一次给大神跪一次
-    // 因为递归式用到了i用到了i+1的值，所以从左往右遍历不行
-    // 所以一下i 从 s 的末尾开始往前遍历。。。巧妙的简化了这一问题
-    // 参照 LongestPalindromicSubstring 这题的dp解法，从右往左简单了好多
+    // è¿™ä¸ªè§£æ³•çœŸæ˜¯çœ‹ä¸€æ¬¡ç»™å¤§ç¥žè·ªä¸€æ¬¡
+    // å› ä¸ºé€’å½’å¼�ç”¨åˆ°äº†iç”¨åˆ°äº†i+1çš„å€¼ï¼Œæ‰€ä»¥ä»Žå·¦å¾€å�³é��åŽ†ä¸�è¡Œ
+    // æ‰€ä»¥ä¸€ä¸‹i ä»Ž s çš„æœ«å°¾å¼€å§‹å¾€å‰�é��åŽ†ã€‚ã€‚ã€‚å·§å¦™çš„ç®€åŒ–äº†è¿™ä¸€é—®é¢˜
+    // å�‚ç…§ LongestPalindromicSubstring è¿™é¢˜çš„dpè§£æ³•ï¼Œä»Žå�³å¾€å·¦ç®€å�•äº†å¥½å¤š
 
     //
     // dp[i] means min cut between i and end of string
     // recursion function is dp[i] = min(dp[i], dp[j+1]+1) if helper[i][j] is true
-    boolean[][] helper = new boolean[s.length()][s.length()];
+		boolean[][] helper = new boolean[s.length()][s.length()];
     int[] dp = new int[s.length() + 1];
 
     for (int i = s.length() - 1 ; i >= 0 ; i--) {

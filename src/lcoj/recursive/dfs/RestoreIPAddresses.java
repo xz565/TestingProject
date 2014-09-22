@@ -1,6 +1,7 @@
-package lcoj;
+package lcoj.recursive.dfs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //Given a string containing only digits, restore it by returning all possible valid IP address combinations.
 //
@@ -66,14 +67,69 @@ public class RestoreIPAddresses {
 		return result;
     }
 
+    public List<String> restoreIpAddresses2(String s) {
+        
+        List<String> rst = new ArrayList<String>();
+        if(s == null || s.length() == 0) {
+            return rst;
+        }
+        
+        List<String> tmp = new ArrayList<String>();
+        helper(s, 0, rst, tmp);
+        
+        return rst;
+    }
+    
+    private void helper(String s, int idx, List<String> rst, List<String> tmp) {
+        
+    	if(idx > s.length() || tmp.size() > 4) {
+    		return;
+    	}
+    	
+    	if(idx == s.length() && tmp.size() == 4) {
+    		StringBuffer sb = new StringBuffer();
+    		for(String str : tmp) {
+    			sb.append(str).append(".");
+    		}
+    		sb.deleteCharAt(sb.length() - 1);
+    		rst.add(sb.toString());
+    		return;
+    	}
+    	
+    	if(idx < s.length()) {
+    		tmp.add(s.substring(idx, idx + 1));
+    		helper(s, idx + 1, rst, tmp);
+    		tmp.remove(tmp.size() - 1);
+    		
+    		if(s.charAt(idx) == '0') {
+    			return;
+    		}
+    	}
+    	
+		if (idx + 1 < s.length()) {
+			tmp.add(s.substring(idx, idx + 2));
+			helper(s, idx + 2, rst, tmp);
+			tmp.remove(tmp.size() - 1);
+		}
+		
+		if(idx + 2 < s.length()) {
+			String ss = s.substring(idx, idx + 3);
+			if(Integer.valueOf(ss) <= 255) {
+				tmp.add(ss);
+				helper(s, idx + 3, rst, tmp);
+				tmp.remove(tmp.size() - 1);
+			}
+		}
+    }
+    
     public static void main(String[] args) {
     	RestoreIPAddresses restoreIPAddresses = new RestoreIPAddresses();
     	String s = "";
 		s = "25525511135";
-		System.out.println(restoreIPAddresses.restoreIpAddresses(s));
+		System.out.println(restoreIPAddresses.restoreIpAddresses2(s));
 		s = "0279245587303";
-		System.out.println(restoreIPAddresses.restoreIpAddresses(s));
+		System.out.println(restoreIPAddresses.restoreIpAddresses2(s));
 		s = "010010";
-		System.out.println(restoreIPAddresses.restoreIpAddresses(s));
+		System.out.println(restoreIPAddresses.restoreIpAddresses2(s));
 	}
 }

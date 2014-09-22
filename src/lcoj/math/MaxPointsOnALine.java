@@ -1,5 +1,8 @@
 package lcoj.math;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import lcoj.common.Point;
 
 /**
@@ -60,8 +63,28 @@ public class MaxPointsOnALine {
       }
     }
 
+    public boolean equals(Object obj) {
+    	if(obj != null && obj instanceof Line) {
+    		Line line = (Line) obj;
+    		if(isEqual(slope, line.slope) && isEqual(intercept, line.intercept) 
+    				&& verticalLine == line.verticalLine) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    public int hashCode() {
+    	int s = (int) slope * 1000;
+    	int i = (int) intercept * 1000;
+    	return s | i;
+    }
 
-    public boolean pass(Point point) {
+    private boolean isEqual(double x, double y) {
+		return Math.abs(x - y) < DELTA;
+	}
+
+	public boolean pass(Point point) {
 
       if (verticalLine) {
         return Math.abs(point.x - intercept) < DELTA;
@@ -69,18 +92,97 @@ public class MaxPointsOnALine {
         return Math.abs(point.y - (slope * point.x + intercept)) < DELTA;
       }
     }
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(verticalLine).append(" ").append(slope).append(" ").append(intercept).append(" ").append(hashCode());
+		return sb.toString();
+	}
   }
 
+  // OK, this solution failed in one test case, can't find the cause... too bad
+  public int maxPointsWrong(Point[] points) {
+	  if(points == null || points.length == 0) {
+		  return 0;
+	  }
+	  
+	  Line maxLine = null;
+	  Map<Line, Integer> countMap = new HashMap<Line, Integer>();
+	  for(int i = 0; i < points.length; i++) {
+		  for(int j = i + 1; j < points.length; j++) {
 
+				  Line line = new Line(points[i], points[j]);
+				  if(countMap.containsKey(line)) {
+					  countMap.put(line, countMap.get(line) + 1);
+				  } else {
+					  countMap.put(line, 1);
+				  }
+				  
+				  if(maxLine == null || countMap.get(line) > countMap.get(maxLine)) {
+					  maxLine = line;
+				  }
+		  }
+	  }
+	  
+	  int max = 1;
+	  if(maxLine != null) {
+		  for(Point p : points) {
+			  if(maxLine.pass(p)) {
+				  max++;
+			  }
+		  }
+	  }
+	  
+	  return max;
+  }
+  
+  // a popular solution on the Internet
+  public int maxPoints(Point[] points) {
+	  if(points == null || points.length ==0) {
+		  return 0;
+	  }
+
+	  Map<Double, Integer> map = new HashMap<Double, Integer>();
+	  int max = 1;
+
+	  for(int i = 0; i < points.length; i++) {
+		  map.clear();
+		  int samePosition = 1;
+		  for(int j = i + 1; j < points.length; j++) {
+			  Point p = points[i];
+			  Point q = points[j];
+			  if(p.x == q.x && p.y == q.y) {
+				  samePosition++;
+			  } else {
+				  double key = p.x == q.x ? Integer.MAX_VALUE : 0.0 + (double)(p.y - q.y) / (p.x - q.x);
+				  if(map.containsKey(key)) {
+					  map.put(key, map.get(key) + 1);
+				  } else {
+					  map.put(key, 1);
+				  }
+			  }
+		  }
+		  System.out.println(map);
+		  for(int value : map.values()) {
+			  if(value + samePosition > max) {
+				  max = value + samePosition;
+			  }
+		  }
+	  }
+	  return max;
+  }
+  
   public static void main(String[] args) {
 
-    Point[] points = new Point[4];
-    points[0] = new Point(3, 10);
-    points[1] = new Point(0, 2);
-    points[2] = new Point(0, 2);
-    points[3] = new Point(3, 10);
+//    Point[] points = new Point[4];
+//    points[0] = new Point(0, 0);
+//    points[1] = new Point(0, 2);
+//    points[2] = new Point(0, 2);
+//    points[3] = new Point(3, 10);
 
+//    Point[] points = new Point[]{new Point(84,250),new Point(0,0),new Point(1,0),new Point(0,-70),new Point(0,-70),new Point(1,-1),new Point(21,10),new Point(42,90),new Point(-42,-230)};
+    Point[] points = new Point[]{new Point(2,3),new Point(3,3),new Point(-5,3)};
     MaxPointsOnALine m = new MaxPointsOnALine();
-    System.out.println(m.maxPointsWorse(points));
+    System.out.println(m.maxPoints(points));
   }
 }

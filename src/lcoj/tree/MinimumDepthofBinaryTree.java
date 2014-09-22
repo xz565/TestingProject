@@ -22,4 +22,22 @@ public class MinimumDepthofBinaryTree {
       return Math.min(minDepth(root.left) + 1, minDepth(root.right) + 1);
     }
   }
+  
+  // better one
+  public int minDepth2(TreeNode root) {
+	  if(root == null) {
+		  return 0;
+	  }
+	  return getDepth(root);
+  }
+  private int getDepth(TreeNode root) {
+	if(root == null) {
+		return Integer.MAX_VALUE;
+	}
+	if(root.left == null && root.right == null) {
+		return 1;
+	} else {
+		return Math.min(getDepth(root.left), getDepth(root.right));
+	}
+  }
 }

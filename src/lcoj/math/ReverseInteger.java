@@ -48,7 +48,7 @@ public class ReverseInteger {
       rst = rst * 10 + lastBit;
       x /= 10;
     }
-    return rst;
+    return rst;	
   }
 
 

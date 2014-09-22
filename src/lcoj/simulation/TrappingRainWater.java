@@ -10,6 +10,7 @@ Expected:	9
 
 public class TrappingRainWater {
 
+	// This is slow, but still got ACed
 	public static int trap(int[] A) {
 
 		int capacity = 0;
@@ -54,9 +55,31 @@ public class TrappingRainWater {
 		return capacity;
 	}
 
+	// for each position, we don't need to go left and right
+	// we need the leftMost info and rightMost info for each index
+	// so we can go left and then go right, keep an array for hightest info
+	public static int trap2(int[] A) {
+		
+		int sum = 0;
+		
+		int[] leftMost = new int[A.length];
+		for(int i = 1; i < A.length; i++) {
+			leftMost[i] = Math.max(leftMost[i - 1], A[i - 1]);
+		}
+		int rightMost = 0;
+		for(int i = A.length - 2; i >= 1; i--) {
+			rightMost = Math.max(rightMost, A[i + 1]);
+			sum += Math.max(Math.min(leftMost[i], rightMost) - A[i], 0);
+		}
+		
+		return sum;
+	}
+	
 	public static void main(String[] args) {
 		
 		int[] A = {4,2,0,3,2,5};
-		System.out.println("Total: " + TrappingRainWater.trap(A));
+		int[] A2 = {0, 2, 0};
+		System.out.println("Total: " + TrappingRainWater.trap2(A));
+		System.out.println("Total: " + TrappingRainWater.trap2(A2));
 	}
 }

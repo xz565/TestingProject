@@ -102,8 +102,10 @@ public class LongestPalindromicSubstring {
   }
 
 
-  // 根据 PalindromePartitioningII 这道题的流弊解法，给出一更简洁的dp
+  // æ ¹æ�® PalindromePartitioningII è¿™é�“é¢˜çš„æµ�å¼Šè§£æ³•ï¼Œç»™å‡ºä¸€æ›´ç®€æ´�çš„dp
   // dp from right to left, more neat and less error
+  
+  // dp[i][j] = s[i] == s[j] && (dp[i+1][j-1] || j-1 < 2)
   public String longestPalindrome_dp2(String s) {
 
     int len = s.length();

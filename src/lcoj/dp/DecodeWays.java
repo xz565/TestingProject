@@ -1,4 +1,4 @@
-package lcoj;
+package lcoj.dp;
 
 import java.util.Arrays;
 import java.util.HashMap;

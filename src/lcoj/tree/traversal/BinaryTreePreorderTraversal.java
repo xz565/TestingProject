@@ -43,15 +43,9 @@ public class BinaryTreePreorderTraversal {
     while (!nodes.isEmpty()) {
       TreeNode currtNode = nodes.pop();
       if (currtNode != null) {
-        list.add(currtNode.val);
-
-        if (currtNode.right != null) {
-          nodes.push(currtNode.right);
-        }
-
-        if (currtNode.left != null) {
-          nodes.push(currtNode.left);
-        }
+		list.add(currtNode.val);
+		nodes.push(currtNode.right);
+		nodes.push(currtNode.left);
       }
 
     }

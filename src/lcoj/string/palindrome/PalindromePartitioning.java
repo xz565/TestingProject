@@ -1,6 +1,7 @@
 package lcoj.string.palindrome;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 // Given a string s, partition s such that every substring of the partition is a palindrome.
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 // ]
 public class PalindromePartitioning {
 
+	// bad base case, line 28 - 33 and 43 -47 is not good, see solution 2
   public ArrayList<ArrayList<String>> partition(String s) {
 
     ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
@@ -72,15 +74,36 @@ public class PalindromePartitioning {
 
     return true;
   }
-
+  
+  public List<List<String>> partition2(String s) {
+      List<List<String>> rst = new ArrayList<List<String>>();
+      if(s == null || s.isEmpty()) {
+	      List<String> tmp = new ArrayList<String>();
+	      rst.add(tmp);
+          return rst;
+      }
+      
+      for(int i = 0; i < s.length(); i++) {
+          String curt = s.substring(0, i + 1);
+          if(isPalindrome(curt)) {
+              List<List<String>> tmp = partition2(s.substring(i + 1));
+              for(List<String> list : tmp) {
+                  list.add(0, curt);
+              }
+              rst.addAll(tmp);
+          }
+      }
+      
+      return rst;
+  }
 
   public static void main(String[] args) {
 
     PalindromePartitioning pp = new PalindromePartitioning();
-    System.out.println(pp.partition(""));
-    System.out.println(pp.partition("a"));
-    System.out.println(pp.partition("bb"));
-    System.out.println(pp.partition("aab"));
-    System.out.println(pp.partition("abba"));
+    System.out.println(pp.partition2(""));
+    System.out.println(pp.partition2("a"));
+    System.out.println(pp.partition2("bb"));
+    System.out.println(pp.partition2("aab"));
+    System.out.println(pp.partition2("abba"));
   }
 }

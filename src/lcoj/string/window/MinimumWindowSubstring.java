@@ -150,6 +150,9 @@ public class MinimumWindowSubstring {
 
     // System.out.println(map);
 
+    // using the map, we don't know when we have all the characters in T
+    // so introduced a count, if count == S.length, we know we have it
+    // then move left to right to get smaller window until count < S.length
     int count = 0;
     int head = 0;
     int minLen = Integer.MAX_VALUE;
